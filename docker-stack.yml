@@ -7,7 +7,7 @@ services:
     image: imaegoo/twikoo
     environment:
       TZ: Asia/Shanghai
-      MONGODB_URI: mongodb://root:B0duEDBW9yFfszd5@twikoo_mongo:27017/twikoo
+      MONGODB_URI: mongodb://root:B0duEDBW9yFfszd5@twikoo_mongo:27017/
     ports:
       - 8080:8080
     networks:
