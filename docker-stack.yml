@@ -1,0 +1,21 @@
+# https://docs.docker.com/compose/compose-file/compose-file-v3/
+version: '3.8'
+networks:
+  twikoo_network:
+services:
+  twikoo_service:
+    image: imaegoo/twikoo
+    environment:
+      TZ: Asia/Shanghai
+      MONGODB_URI: mongodb://root:B0duEDBW9yFfszd5@twikoo_mongo:27017/twikoo
+    ports:
+      - 8080:8080
+    networks:
+      - twikoo_network
+  twikoo_mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: B0duEDBW9yFfszd5
+    networks:
+      - twikoo_network
