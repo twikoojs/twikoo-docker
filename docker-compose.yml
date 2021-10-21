@@ -1,5 +1,5 @@
 # https://docs.docker.com/compose/compose-file/compose-file-v3/
-version: '3.8'
+version: '3'
 networks:
   twikoo_network:
 services:
@@ -17,5 +17,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: B0duEDBW9yFfszd5
+    volumes:
+      - ./data:/data/db
     networks:
       - twikoo_network
