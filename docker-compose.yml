@@ -9,6 +9,8 @@ services:
       MONGODB_URI: mongodb://root:B0duEDBW9yFfszd5@twikoo_mongo:27017/
     ports:
       - 8080:8080
+    networks:
+      - twikoo_network
   # 数据库，如使用已有数据库，请注释
   twikoo_mongo:
     image: mongo
@@ -17,6 +19,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: B0duEDBW9yFfszd5
     volumes:
       - ./data:/data/db
+    networks:
+      - twikoo_network
   # 用于浏览器操作数据库，如需，请解除注释
   # twikoo_mongo_express:
   #   image: mongo-express
@@ -26,3 +30,5 @@ services:
   #     ME_CONFIG_MONGODB_ADMINUSERNAME: root
   #     ME_CONFIG_MONGODB_ADMINPASSWORD: B0duEDBW9yFfszd5
   #     ME_CONFIG_MONGODB_URL: mongodb://root:B0duEDBW9yFfszd5@twikoo_mongo:27017/
+networks:
+  twikoo_network:
