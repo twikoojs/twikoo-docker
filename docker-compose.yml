@@ -2,17 +2,17 @@
 version: '3'
 services:
   # Twikoo 主服务
-  twikoo_service:
+  twikoo-service:
     image: imaegoo/twikoo
     environment:
       TZ: Asia/Shanghai
-      MONGODB_URI: mongodb://root:B0duEDBW9yFfszd5@twikoo_mongo:27017/
+      MONGODB_URI: mongodb://root:B0duEDBW9yFfszd5@twikoo-mongo:27017/
     ports:
       - 8080:8080
     networks:
-      - twikoo_network
+      - twikoo-network
   # 数据库，如使用已有数据库，请注释
-  twikoo_mongo:
+  twikoo-mongo:
     image: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -20,15 +20,15 @@ services:
     volumes:
       - ./data:/data/db
     networks:
-      - twikoo_network
+      - twikoo-network
   # 用于浏览器操作数据库，如需，请解除注释
-  # twikoo_mongo_express:
+  # twikoo-mongo-express:
   #   image: mongo-express
   #   ports:
   #     - 8081:8081
   #   environment:
   #     ME_CONFIG_MONGODB_ADMINUSERNAME: root
   #     ME_CONFIG_MONGODB_ADMINPASSWORD: B0duEDBW9yFfszd5
-  #     ME_CONFIG_MONGODB_URL: mongodb://root:B0duEDBW9yFfszd5@twikoo_mongo:27017/
+  #     ME_CONFIG_MONGODB_URL: mongodb://root:B0duEDBW9yFfszd5@twikoo-mongo:27017/
 networks:
-  twikoo_network:
+  twikoo-network:
