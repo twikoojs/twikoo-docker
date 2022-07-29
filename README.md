@@ -4,10 +4,6 @@ Twikoo 私有部署 Docker 镜像。
 
 ## 部署指南
 
-### 使用 Okteto 部署
-
-[![Develop on Okteto](https://okteto.com/develop-okteto.svg)](https://cloud.okteto.com/deploy)
-
 ### 使用 Docker 部署
 
 1. 安装 Docker，以 Ubuntu 系统为例：
