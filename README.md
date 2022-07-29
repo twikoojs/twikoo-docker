@@ -1,13 +1,6 @@
-**⚠ 提示 ⚠**
-
-**本项目还有很多影响使用的 bug 没修复（比如管理面板无法使用），并且短时间内不会有稳定版本** ~~（作者不仅很菜还很忙）~~ <br>
-**如果您确实需要支持私有部署评论系统，请优先考虑其他评论系统**
-
 # Twikoo Docker Image
 
 Twikoo 私有部署 Docker 镜像。
-
-WARNING: 私有部署不是 Twikoo 推荐的部署方式，**请自行申请域名、证书**，并承担包括但不限于低性能、数据丢失等风险。
 
 ## 部署指南
 
@@ -22,22 +15,16 @@ WARNING: 私有部署不是 Twikoo 推荐的部署方式，**请自行申请域�
 ```bash
 curl -fsSL https://get.docker.com -o get-docker.sh  # 下载安装脚本
 sudo sh get-docker.sh                               # 安装 docker
-sudo apt-get install docker-compose                 # 安装 docker-compose
 sudo usermod -aG docker $USER                       # 将当前用户加入 docker 用户组
 ```
 
-2. 安装 Twikoo：
+2. 启动 Twikoo：
 
 ```bash
-mkdir twikoo          # 创建 twikoo 目录
-cd twikoo             # 进入 twikoo 目录
-mkdir data            # 创建数据库目录
-curl -O https://cdn.jsdelivr.net/gh/imaegoo/twikoo-docker/docker-compose.yml
-                      # 下载 docker-compose.yml
-docker-compose up -d  # 启动 twikoo
+docker run -p 8080:8080 -v ${PWD}/data:/app/data -d imaegoo/twikoo
 ```
 
-默认端口 8080，如果遇到端口冲突问题，请修改 docker-compose.yml 中的端口。
+默认端口 8080，如果遇到端口冲突问题，请修改命令中的 `8080:8080` 为 `自定义端口:8080`。
 
 3. 测试 Twikoo：
 
@@ -72,39 +59,22 @@ http {
 
 ### 不使用 Docker 部署
 
-1. 安装 Node.js 运行环境，版本号不低于 12.x；
+1. 服务端下载安装 [Node.js](https://nodejs.org/zh-cn/)
+2. 安装 Twikoo server: `npm i -g tkserver`
+3. 根据需要配置环境变量
 
-2. 安装 MongoDB 服务端；
+| 名称 | 描述 | 默认值 |
+| ---- | ---- | ---- |
+| `TWIKOO_DATA` | 数据库存储路径 | `./data` |
+| `TWIKOO_PORT` | 端口号 | `8080` |
+| `TWIKOO_THROTTLE` | IP 请求限流，当同一 IP 短时间内请求次数超过阈值将对该 IP 返回错误 | `250` |
 
-3. 安装 Twikoo：
+4. 启动 Twikoo server: `tkserver`
+5. 访问 `http://服务端IP:8080`
+6. 若能正常访问，服务端地址（包含 `http://` 和端口号，例如 `http://12.34.56.78:8080`）即为您的环境 id
 
-```bash
-mkdir twikoo                # 创建 twikoo 目录
-cd twikoo                   # 进入 twikoo 目录
-npm install twikoo-vercel   # 安装 twikoo-vercel
-curl -O https://cdn.jsdelivr.net/gh/imaegoo/twikoo-docker/index.js
-                            # 下载 index.js
-export MONGODB_URI=mongodb://数据库用户名:数据库密码@localhost:27017/
-                            # 配置环境变量
-node index.js               # 启动 twikoo
-```
+### 其他事项
 
-默认端口 8080，如果遇到端口冲突问题，请修改 index.js 中的端口。
-
-3. 测试 Twikoo：
-
-```bash
-curl http://localhost:8080/
-```
-
-如果您看到类似 “Twikoo 云函数运行正常” 的提示，那么 Twikoo 已经部署成功。
-
-4. 配置前置 Nginx 服务器或负载网关，以通过 HTTPS 访问 Twikoo，过程略。
-
-## 待办项
-
-- [x] mongo 数据不能放容器里，怎么映射到物理盘上
-- [ ] https 证书怎么申请，能不能在容器内自动申请
-- [ ] serverless 天生无状态，但只有一个节点的情况下，要做并发请求隔离
-- [ ] 管理面板鉴权
-- [ ] 加入 twikoo 文档教程
+1. Linux 服务器可以用 `nohup tkserver >> tkserver.log 2>&1 &` 命令后台启动
+2. 强烈建议配置前置 nginx 服务器并配置 https 证书
+3. 数据在服务器上，请注意定期备份数据
