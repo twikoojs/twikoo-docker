@@ -2,7 +2,8 @@ FROM node:lts AS build
 WORKDIR /app
 ENV NODE_ENV production
 RUN set -eux; \
-  npm install --production tkserver@latest
+  npm install --production tkserver@latest; \
+  mkdir -p data
 FROM node:lts-buster-slim
 WORKDIR /app
 ENV NODE_ENV production
