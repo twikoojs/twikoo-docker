@@ -7,6 +7,6 @@ services:
       TWIKOO_THROTTLE: 250
       TZ: Asia/Shanghai
     volumes:
-      - ./data:/app/data
+      - /app/data
     ports:
       - 8080:8080
