@@ -1,3 +1,4 @@
+ARG NODE_IMAGE=node
 FROM ${NODE_IMAGE}:lts AS build
 WORKDIR /app
 ENV NODE_ENV production
