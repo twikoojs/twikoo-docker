@@ -20,6 +20,8 @@ sudo usermod -aG docker $USER                       # 将当前用户加入 dock
 docker run -p 8080:8080 -v ${PWD}/data:/app/data -d imaegoo/twikoo
 ```
 
+如果镜像下载速度慢，可以将命令中的 `imaegoo/twikoo` 替换成 `registry.cn-hangzhou.aliyuncs.com/imaegoo/twikoo`
+
 默认端口 8080，如果遇到端口冲突问题，请修改命令中的 `8080:8080` 为 `自定义端口:8080`。
 
 3. 测试 Twikoo：
