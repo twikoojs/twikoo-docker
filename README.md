@@ -76,3 +76,4 @@ http {
 1. Linux 服务器可以用 `nohup tkserver >> tkserver.log 2>&1 &` 命令后台启动
 2. 强烈建议配置前置 nginx 服务器并配置 https 证书
 3. 数据在服务器上，请注意定期备份数据
+
