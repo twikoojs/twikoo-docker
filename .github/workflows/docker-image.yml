@@ -50,8 +50,6 @@ jobs:
           platforms: linux/arm/v7
           push: true
           tags: |
-            imaegoo/twikoo:latest
-            imaegoo/twikoo:${{ env.TWIKOO_LATEST_VERSION }}
             imaegoo/twikoo:arm32v7
             imaegoo/twikoo:${{ env.TWIKOO_LATEST_VERSION }}-arm32v7
           build-args: NODE_IMAGE=arm32v7/node
