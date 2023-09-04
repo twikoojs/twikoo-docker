@@ -30,13 +30,18 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       -
+        name: Get twikoo:latest version
+        run: echo "TWIKOO_LATEST_VERSION=$(npm view twikoo@latest version)" >> "$GITHUB_ENV"
+      -
         name: Build and push amd64 image
         uses: docker/build-push-action@v3
         with:
           context: .
           platforms: linux/amd64
           push: true
-          tags: imaegoo/twikoo:latest
+          tags:
+            - imaegoo/twikoo:latest
+            - imaegoo/twikoo:${{ env.TWIKOO_LATEST_VERSION }}
       -
         name: Build and push arm32v7 image
         uses: docker/build-push-action@v3
@@ -44,5 +49,7 @@ jobs:
           context: .
           platforms: linux/arm/v7
           push: true
-          tags: imaegoo/twikoo:arm32v7
+          tags:
+            - imaegoo/twikoo:arm32v7
+            - imaegoo/twikoo:${{ env.TWIKOO_LATEST_VERSION }}-arm32v7
           build-args: NODE_IMAGE=arm32v7/node
