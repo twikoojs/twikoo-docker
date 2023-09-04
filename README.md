@@ -1,3 +1,5 @@
+### ⚠ 本仓库代码已合并到 [github.com/imaegoo/twikoo](https://github.com/imaegoo/twikoo)，本仓库不再维护
+
 # Twikoo Docker Image
 
 Twikoo 私有部署 Docker 镜像。
